@@ -3,7 +3,7 @@
   const y = document.getElementById('year');
   if (y && !y.textContent) y.textContent = new Date().getFullYear();
 
-  const btn = document.getElementById('toTop');
+  const btn = document.querySelector('.toTop-btn');
   const toggle = () => btn?.classList.toggle('hidden', window.scrollY < 600);
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
@@ -21,7 +21,10 @@
   const onScroll = () => header.classList.toggle('is-solid', window.scrollY > 40);
   onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
 
-  const sections = ['#inventory','#services','#about','#contact'].map(id=>document.querySelector(id)).filter(Boolean);
+  // include branches in active highlight
+  const sections = ['#inventory','#services','#about','#branches','#contact']
+    .map(id=>document.querySelector(id)).filter(Boolean);
+
   if ('IntersectionObserver' in window && sections.length){
     const map = new Map(navLinks.map(a => [a.getAttribute('href'), a]));
     const io = new IntersectionObserver(entries => {
@@ -33,15 +36,29 @@
     sections.forEach(s => io.observe(s));
   }
 
-  const openSheet = () => { sheet.classList.add('show'); menuBtn.classList.add('is-open'); document.body.classList.add('noscroll'); menuBtn.setAttribute('aria-expanded','true'); };
-  const closeSheet = () => { sheet.classList.remove('show'); menuBtn.classList.remove('is-open'); document.body.classList.remove('noscroll'); menuBtn.setAttribute('aria-expanded','false'); };
+  const setIcon = (open) => {
+    const i = menuBtn.querySelector('i');
+    if (!i) return;
+    i.classList.toggle('fa-bars', !open);
+    i.classList.toggle('fa-xmark', open);
+  };
+
+  const openSheet = () => {
+    sheet.classList.add('show'); document.body.classList.add('noscroll');
+    menuBtn.setAttribute('aria-expanded','true'); setIcon(true);
+  };
+  const closeSheet = () => {
+    sheet.classList.remove('show'); document.body.classList.remove('noscroll');
+    menuBtn.setAttribute('aria-expanded','false'); setIcon(false);
+  };
+
   menuBtn?.addEventListener('click', () => sheet.classList.contains('show') ? closeSheet() : openSheet());
   close?.addEventListener('click', closeSheet);
   sheet?.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
   sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSheet));
 })();
 
-/* Inventory filter */
+/* Inventory filter (left in place in case you enable inputs later) */
 (() => {
   const search = document.getElementById('search');
   const filter = document.getElementById('filter');

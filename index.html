@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>VK Motors | Multibrand Motorcycle Dealer — Isanpur • Vatva • Narol</title>
   <meta name="description" content="VK Motors — Test rides, quick finance, genuine service & accessories. Branches in Isanpur, Vatva, and Narol. Call +91 88663 32130." />
+
+  <!-- Tailwind + your stylesheet -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Font Awesome 6 (solid + brands) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
 
   <!-- Business schema -->
   <script type="application/ld+json">
@@ -27,39 +32,35 @@
 </head>
 <body id="top" class="bg-stone-50 text-slate-900">
 
-<!-- Top strip (desktop) -->
-<!-- <div class="hidden md:block bg-ink text-stone-200 text-sm">
-  <div class="max-w-6xl mx-auto px-4 py-2 flex gap-6 flex-wrap">
-    <span>VK Motors — Multibrand</span>
-    <span>Owner: Arunkumar Baghel</span>
-    <a href="tel:+918866332130" class="underline underline-offset-4">+91 88663 32130</a>
-    <span class="ml-auto">Isanpur • Vatva • Narol</span>
-  </div>
-</div> -->
-
 <!-- Header -->
 <header id="siteHeader" class="fixed top-0 inset-x-0 z-50">
   <div class="mx-auto max-w-6xl px-4">
-    <div class="h-16 flex items-center justify-between">
+    <div class="flex items-center justify-between">
       <a href="#top" class="flex items-center gap-2">
-        <img src="assets/img/logo.png" alt="VK Motors" class="h-8 w-auto">
-        <span class="font-extrabold text-lg header-brand">VK Motors</span>
+        <img src="assets/img/LogoNew-removebg-preview.png" alt="VK Motors" class="Logo">
       </a>
 
       <nav class="hidden md:flex items-center gap-1 rounded-full px-2 py-1 header-pill">
         <a href="#inventory" class="nav-a">Inventory</a>
         <a href="#services"  class="nav-a">Services</a>
         <a href="#about"     class="nav-a">About</a>
+        <a href="#branches"  class="nav-a nav-accent">Branches</a>
         <a href="#contact"   class="nav-a">Contact</a>
       </nav>
 
-      <div class="hidden md:flex items-center gap-2">
-        <a href="https://wa.me/918866332130" target="_blank" rel="noopener" class="btn-ghost small">WhatsApp</a>
-        <a href="tel:+918866332130" class="btn-primary small">Call</a>
+      <!-- Icon actions (WhatsApp, Call) -->
+      <div class="hidden md:flex items-center gap-2 header-actions">
+        <a href="https://wa.me/918866332130" target="_blank" rel="noopener" class="icon-btn" aria-label="WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+918866332130" class="icon-btn" aria-label="Call">
+          <i class="fa-solid fa-phone"></i>
+        </a>
       </div>
 
-      <button id="menuBtn" class="md:hidden ham" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <!-- FA hamburger -->
+      <button id="menuBtn" class="md:hidden icon-btn" aria-label="Open menu" aria-expanded="false">
+        <i class="fa-solid fa-bars-staggered text-lg"></i>
       </button>
     </div>
   </div>
@@ -72,19 +73,26 @@
           <img src="assets/img/logo.png" class="h-7" alt="">
           <span class="font-extrabold">VK Motors</span>
         </div>
-        <button id="closeSheet" class="close-x" aria-label="Close">✕</button>
+        <button id="closeSheet" class="close-x" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
       <nav class="mt-6 grid gap-1">
         <a class="m-a" href="#inventory">Inventory</a>
         <a class="m-a" href="#services">Services</a>
         <a class="m-a" href="#about">About</a>
+        <a class="m-a" href="#branches">Branches</a>
         <a class="m-a" href="#contact">Contact</a>
       </nav>
 
       <div class="mt-5 grid grid-cols-2 gap-2">
-        <a href="https://wa.me/918866332130" target="_blank" rel="noopener" class="btn-ghost w-full">WhatsApp</a>
-        <a href="tel:+918866332130" class="btn-primary w-full">Call</a>
+        <a href="https://wa.me/918866332130" target="_blank" rel="noopener" class="btn-ghost w-full">
+          <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp
+        </a>
+        <a href="tel:+918866332130" class="btn-primary w-full">
+          <i class="fa-solid fa-phone mr-2"></i> Call
+        </a>
       </div>
     </div>
   </div>
@@ -92,39 +100,26 @@
 
 <!-- Hero -->
 <section id="hero" class="relative overflow-hidden">
-  <div class="hero-wrap">
-    <img id="heroImg" src="assets/img/hero.jpeg" alt="VK Motors showroom" class="hero-bg" decoding="async" />
-    <div class="hero-overlay"></div>
+  <div class="hero-wrap" style="background-image:url('assets/img/hero-background.jpg');">
 
-    <div class="hero-inner">
-      <!-- simple text on image (no card) -->
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="chip">Multibrand Dealer</span>
-          <span class="chip">Isanpur</span>
-          <span class="chip">Vatva</span>
-          <span class="chip">Narol</span>
-        </div>
-
-        <h1 class="hero-title">
-          Ride home happy — test rides, finance & service under one roof.
-        </h1>
-
-        <p class="hero-sub">
-          Owner: <strong>Arunkumar Baghel</strong> •
-          <a class="hero-link" href="tel:+918866332130">+91&nbsp;88663&nbsp;32130</a>
-        </p>
-
-        <div class="hero-ctas">
-          <a href="#inventory" class="btn-primary btn-compact">Browse bikes</a>
-          <a href="https://wa.me/918866332130" target="_blank" rel="noopener" class="btn-ghost-dark btn-compact">WhatsApp</a>
-          <a href="tel:+918866332130" class="btn-ghost-dark btn-compact">Call now</a>
+    <div class="max-w-6xl mx-auto px-4" style="height:100%;">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-eyebrow"></div>
+          <h1 class="hero-title">
+            Ride home happy — test rides, finance & service under one roof.
+          </h1>
+          <div class="hero-ctas">
+            <a href="#inventory" class="btn-primary btn-compact btn-hero">
+              <span>Browse bikes</span>
+              <i class="fa-solid fa-arrow-right-long ml-2"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 <!-- Inventory -->
 <section id="inventory" class="sec">
@@ -136,27 +131,15 @@
     </div>
 
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-      <div class="branch-badges">
-        <span class="branch">Isanpur</span><span class="branch">Narol</span><span class="branch">Vatva</span>
-      </div>
-      <div class="flex gap-2">
-        <input id="search" type="text" placeholder="Search model…" class="w-52 md:w-72 px-3 py-2 rounded-lg border" />
-        <select id="filter" class="px-3 py-2 rounded-lg border">
-          <option value="">All</option>
-          <option value="commuter">Commuter</option>
-          <option value="adventure">Adventure</option>
-          <option value="sport">Sport</option>
-          <option value="cruiser">Cruiser</option>
-          <option value="retro">Retro</option>
-        </select>
-      </div>
+      <div class="flex gap-2"></div>
     </div>
 
     <div id="grid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- cards unchanged (badges hidden by CSS) -->
       <!-- 1 -->
       <article class="inv-card reveal" data-category="sport" data-name="KTM Duke 390">
         <div class="inv-media">
-          <img src="assets/img/bike1.jpg" alt="KTM Duke 390" loading="lazy" decoding="async">
+          <img src="assets/img/card1.jpeg" alt="KTM Duke 390" loading="lazy" decoding="async">
           <span class="inv-badge">Hot</span>
         </div>
         <div class="inv-body">
@@ -168,54 +151,52 @@
 
       <!-- 2 -->
       <article class="inv-card reveal" data-category="commuter" data-name="Honda Shine 125">
-        <div class="inv-media"><img src="assets/img/bike2.jpg" alt="Honda Shine 125" loading="lazy"><span class="inv-badge">Value</span></div>
+        <div class="inv-media"><img src="assets/img/card2.avif" alt="Honda Shine 125" loading="lazy"><span class="inv-badge">Value</span></div>
         <div class="inv-body"><h3 class="inv-title">Honda Shine 125</h3><p class="inv-spec">125cc • FI • Mileage+</p><div class="inv-foot"><span class="inv-price">₹82,000*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 3 -->
       <article class="inv-card reveal" data-category="adventure" data-name="RE Himalayan 450">
-        <div class="inv-media"><img src="assets/img/bike3.jpg" alt="RE Himalayan 450" loading="lazy"><span class="inv-badge">New</span></div>
+        <div class="inv-media"><img src="assets/img/card3.avif" alt="RE Himalayan 450" loading="lazy"><span class="inv-badge">New</span></div>
         <div class="inv-body"><h3 class="inv-title">RE Himalayan 450</h3><p class="inv-spec">452cc • TFT • LC</p><div class="inv-foot"><span class="inv-price">₹2.85L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 4 -->
       <article class="inv-card reveal" data-category="retro" data-name="Yamaha FZ-X">
-        <div class="inv-media"><img src="assets/img/bike4.jpeg" alt="Yamaha FZ-X" loading="lazy"><span class="inv-badge">Retro</span></div>
+        <div class="inv-media"><img src="assets/img/card4.avif" alt="Yamaha FZ-X" loading="lazy"><span class="inv-badge">Retro</span></div>
         <div class="inv-body"><h3 class="inv-title">Yamaha FZ-X</h3><p class="inv-spec">149cc • Bluetooth • ABS</p><div class="inv-foot"><span class="inv-price">₹1.37L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 5 -->
       <article class="inv-card reveal" data-category="sport" data-name="TVS Apache RTR 200 4V">
-        <div class="inv-media"><img src="assets/img/bike5.jpg" alt="TVS Apache RTR 200 4V" loading="lazy"><span class="inv-badge">Popular</span></div>
+        <div class="inv-media"><img src="assets/img/card5.avif" alt="TVS Apache RTR 200 4V" loading="lazy"><span class="inv-badge">Popular</span></div>
         <div class="inv-body"><h3 class="inv-title">TVS Apache RTR 200 4V</h3><p class="inv-spec">200cc • Ride Modes • Slipper Clutch</p><div class="inv-foot"><span class="inv-price">₹1.46L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 6 -->
       <article class="inv-card reveal" data-category="cruiser" data-name="Bajaj Avenger 220">
-        <div class="inv-media"><img src="assets/img/bike1.jpg" alt="Bajaj Avenger 220" loading="lazy"><span class="inv-badge">Cruiser</span></div>
+        <div class="inv-media"><img src="assets/img/card6.avif" alt="Bajaj Avenger 220" loading="lazy"><span class="inv-badge">Cruiser</span></div>
         <div class="inv-body"><h3 class="inv-title">Bajaj Avenger 220</h3><p class="inv-spec">220cc • Low Seat • Comfort+</p><div class="inv-foot"><span class="inv-price">₹1.44L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 7 -->
       <article class="inv-card reveal" data-category="adventure" data-name="Hero Xpulse 200 4V">
-        <div class="inv-media"><img src="assets/img/bike2.jpg" alt="Hero Xpulse 200 4V" loading="lazy"><span class="inv-badge">Trail</span></div>
+        <div class="inv-media"><img src="assets/img/card7.avif" alt="Hero Xpulse 200 4V" loading="lazy"><span class="inv-badge">Trail</span></div>
         <div class="inv-body"><h3 class="inv-title">Hero Xpulse 200 4V</h3><p class="inv-spec">200cc • Spoke • Mode ABS</p><div class="inv-foot"><span class="inv-price">₹1.46L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 8 -->
       <article class="inv-card reveal" data-category="sport" data-name="Yamaha R15 V4">
-        <div class="inv-media"><img src="assets/img/bike3.jpg" alt="Yamaha R15 V4" loading="lazy"><span class="inv-badge">Sport</span></div>
+        <div class="inv-media"><img src="assets/img/card8.avif" alt="Yamaha R15 V4" loading="lazy"><span class="inv-badge">Sport</span></div>
         <div class="inv-body"><h3 class="inv-title">Yamaha R15 V4</h3><p class="inv-spec">155cc • VVA • Dual ABS</p><div class="inv-foot"><span class="inv-price">₹1.83L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
 
       <!-- 9 -->
       <article class="inv-card reveal" data-category="retro" data-name="RE Classic 350">
-        <div class="inv-media"><img src="assets/img/bike4.jpeg" alt="RE Classic 350" loading="lazy"><span class="inv-badge">Classic</span></div>
+        <div class="inv-media"><img src="assets/img/card9.avif" alt="RE Classic 350" loading="lazy"><span class="inv-badge">Classic</span></div>
         <div class="inv-body"><h3 class="inv-title">RE Classic 350</h3><p class="inv-spec">349cc • J-Platform • ABS</p><div class="inv-foot"><span class="inv-price">₹1.93L*</span><div class="inv-cta"><a href="#contact" class="text-link">Enquire</a><a href="#contact" class="text-link muted">Test ride</a></div></div></div>
       </article>
     </div>
-
-    <p class="mt-4 text-xs text-slate-500">*Ex-showroom; prices may vary by city.</p>
   </div>
 </section>
 
@@ -277,18 +258,46 @@
         <div class="stat"><div class="stat-num">9k+</div><div class="stat-label">Bikes Delivered</div></div>
         <div class="stat"><div class="stat-num">4.8★</div><div class="stat-label">Google Rating</div></div>
       </div>
-
-      <div class="mt-6 branch-badges">
-        <span class="branch">Isanpur</span><span class="branch">Narol</span><span class="branch">Vatva</span>
-      </div>
     </div>
 
     <div class="relative reveal">
-      <img src="assets/img/hero.jpeg" alt="Showroom" class="w-full h-80 object-cover rounded-xl border">
-      <div class="grid grid-cols-3 gap-3 mt-3">
-        <div class="mini-tile"><span class="mini-title">Isanpur</span><p class="mini-text">Vishalnagar Char Rasta, Near Govindwadi, 382443</p></div>
-        <div class="mini-tile"><span class="mini-title">Narol</span><p class="mini-text">Near Hi-fi, 382405</p></div>
-        <div class="mini-tile"><span class="mini-title">Vatva</span><p class="mini-text">Vatva, 382440</p></div>
+      <img src="assets/img/hero.jpeg" alt="Showroom" class="w-full h-80 object-cover rounded-xl border about-img">
+    </div>
+  </div>
+</section>
+
+<!-- 🌍 Our Branches Section -->
+<section id="branches" class="branches-section">
+  <div class="container">
+    <h2 class="section-title">Our Branches</h2>
+    <p class="section-subtitle">Visit us at our nearest branch</p>
+
+    <div class="branches-grid">
+      <!-- Isanpur -->
+      <div class="branch-card">
+        <h3>Isanpur</h3>
+        <p><strong>VK Motors</strong></p>
+        <p>Vishalnagar Char Rasta, Near Govindwadi</p>
+        <p>Isanpur, Ahmedabad - 382443</p>
+        <p>📞 +91 88663 32130</p>
+      </div>
+
+      <!-- Narol -->
+      <div class="branch-card">
+        <h3>Narol</h3>
+        <p><strong>VK Motors</strong></p>
+        <p>Near Hi-fi</p>
+        <p>Narol, Ahmedabad - 382405</p>
+        <p>📞 +91 88663 32130</p>
+      </div>
+
+      <!-- Vatva -->
+      <div class="branch-card">
+        <h3>Vatva</h3>
+        <p><strong>VK Motors</strong></p>
+        <p>Vatva</p>
+        <p>Ahmedabad - 382440</p>
+        <p>📞 +91 88663 32130</p>
       </div>
     </div>
   </div>
@@ -317,11 +326,6 @@
       </form>
 
       <div class="rounded-2xl border p-6 bg-stone-50">
-        <div class="grid sm:grid-cols-3 gap-6 text-sm">
-          <div><h4 class="font-bold text-ink">Isanpur</h4><p>Vishalnagar Char Rasta, Near Govindwadi, Ahmedabad 382443</p></div>
-          <div><h4 class="font-bold text-ink">Narol</h4><p>Near Hi-fi, Ahmedabad 382405</p></div>
-          <div><h4 class="font-bold text-ink">Vatva</h4><p>Vatva, Ahmedabad 382440</p></div>
-        </div>
         <div class="mt-6 rounded-xl overflow-hidden border">
           <iframe title="Isanpur Map" class="w-full h-64" loading="lazy" src="https://www.google.com/maps?q=VK%20Motors%20Isanpur%20Ahmedabad&output=embed"></iframe>
         </div>
@@ -330,47 +334,41 @@
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="relative pt-14 bg-ink text-stone-200">
-  <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent"></div>
+<!-- Footer (refreshed) -->
+<footer class="site-footer bg-ink text-stone-200">
   <div class="max-w-6xl mx-auto px-4">
-    <div class="footer-top">
-      <div class="ft-col">
+    <div class="footer-grid">
+      <div>
         <div class="ft-brand">
-          <img src="assets/img/logo.png" alt="VK Motors" class="h-8">
-          <span class="name">VK Motors</span>
-        </div>
-        <p class="ft-text">Isanpur • Narol • Vatva — Ahmedabad<br>Mon–Sun, 10:00–20:00</p>
-        <a class="ft-link" href="tel:+918866332130">+91 88663 32130</a>
-        <div class="branch-badges mt-3">
-          <span class="branch">Isanpur</span><span class="branch">Narol</span><span class="branch">Vatva</span>
+          <img src="assets/img/logo.png" alt="VK Motors" class="ft-logo">
+          <div>
+            <div class="ft-name">VK Motors</div>
+            <div class="ft-owner">Owner: Arunkumar Baghel</div>
+            <a class="ft-phone" href="tel:+918866332130"><i class="fa-solid fa-phone mr-2"></i>+91 88663 32130</a>
+          </div>
         </div>
       </div>
 
-      <div class="ft-col">
-        <div class="ft-head">Links</div>
+      <div>
+        <div class="ft-head">Quick links</div>
         <ul class="ft-nav">
           <li><a href="#inventory">Inventory</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#branches">Branches</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
 
-      <!-- Newsletter (fixed on dark) -->
-      <div class="ft-col">
-        <div class="ft-head">Updates</div>
-        <form name="newsletter" method="POST" data-netlify="true" netlify>
-          <input type="hidden" name="form-name" value="newsletter" />
-          <div class="footer-news">
-            <label class="fgroup">
-              <input class="finput-dark" type="email" name="email" required placeholder=" ">
-              <span class="flabel">Your email</span>
-            </label>
-            <button class="btn-primary mt-2 sm:mt-0 w-full sm:w-auto">Subscribe</button>
-          </div>
-          <p class="ft-hint">No spam. Unsubscribe anytime.</p>
-        </form>
+      <div>
+        <div class="ft-head">Connect</div>
+        <div class="ft-social">
+          <a href="https://wa.me/918866332130" class="soc" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="tel:+918866332130" class="soc" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+          <a href="#" class="soc" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="soc" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="soc" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
       </div>
     </div>
 
