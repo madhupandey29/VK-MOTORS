@@ -204,7 +204,7 @@ body.noscroll{ overflow:hidden }
   .footer-grid{ grid-template-columns:1fr; }
 }
 .ft-brand{ display:flex; gap:14px; align-items:center; }
-.ft-logo{ height:90px; width:auto; filter:drop-shadow(0 2px 8px rgba(0,0,0,.25)); }
+.ft-logo{ height:91px; width:auto; filter:drop-shadow(0 2px 8px rgba(0,0,0,.25)); }
 .ft-name{ font-size:1.15rem; font-weight:900; color:#e5e7eb; }
 .ft-owner{ color:#cbd5e1; margin-top:2px; }
 .ft-phone{ display:inline-flex; align-items:center; gap:.5rem; margin-top:8px; font-weight:800; color:#fff; }
