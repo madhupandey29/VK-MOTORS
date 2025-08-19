@@ -110,7 +110,7 @@
     phone.value = v;
   });
 
-  // WhatsApp handoff to +91 99786 35079
+  // WhatsApp handoff to VK Motors
   form.addEventListener('submit', () => {
     const fd = new FormData(form);
     const name  = (fd.get('name')  || '').toString().trim();
@@ -127,7 +127,7 @@
     ].filter(Boolean);
 
     const text = lines.join('\n');
-    const waNumber = '919978635079';   // +91 99786 35079
+    const waNumber = '+91 88663 32130';   
     const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
 
