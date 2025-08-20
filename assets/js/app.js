@@ -1,68 +1,144 @@
-/* Year + back to top */
+/* =========================
+   Year + Back to Top
+   ========================= */
 (() => {
-  const y = document.getElementById('year');
-  if (y && !y.textContent) y.textContent = new Date().getFullYear();
+  const yearEl = document.getElementById('year');
+  if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
 
-  const btn = document.querySelector('.toTop-btn');
-  const toggle = () => btn?.classList.toggle('hidden', window.scrollY < 600);
+  // Support either class (.toTop-btn) or id (#toTop)
+  const btn = document.querySelector('.toTop-btn') || document.getElementById('toTop');
+  if (!btn) return;
+
+  const showAt = 450; // px
+  const toggle = () => btn.classList.toggle('hidden', (window.scrollY || 0) < showAt);
+
   window.addEventListener('scroll', toggle, { passive: true });
+  window.addEventListener('load', toggle);
   toggle();
-  btn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  btn.addEventListener('click', () => {
+    const scrollOpts = { top: 0, behavior: 'smooth' };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) scrollOpts.behavior = 'auto';
+    window.scrollTo(scrollOpts);
+  });
 })();
 
-/* Header */
+/* =========================
+   Header: sticky, mobile sheet, active link
+   ========================= */
 (() => {
-  const header  = document.getElementById('siteHeader');
-  const menuBtn = document.getElementById('menuBtn');
-  const sheet   = document.getElementById('mobileSheet');
-  const close   = document.getElementById('closeSheet');
-  const navLinks= [...document.querySelectorAll('.nav-a')];
+  const header   = document.getElementById('siteHeader');
+  const menuBtn  = document.getElementById('menuBtn');
+  const sheet    = document.getElementById('mobileSheet');
+  const closeBtn = document.getElementById('closeSheet');
+  const navLinks = [...document.querySelectorAll('.nav-a')];
 
-  const onScroll = () => header.classList.toggle('is-solid', window.scrollY > 40);
-  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
-
-  // include branches in active highlight
-  const sections = ['#inventory','#services','#about','#branches','#contact']
-    .map(id=>document.querySelector(id)).filter(Boolean);
-
-  if ('IntersectionObserver' in window && sections.length){
-    const map = new Map(navLinks.map(a => [a.getAttribute('href'), a]));
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        const a = map.get('#' + en.target.id);
-        if (a && en.isIntersecting){ navLinks.forEach(x=>x.classList.remove('active')); a.classList.add('active'); }
-      });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0.01 });
-    sections.forEach(s => io.observe(s));
+  if (header) {
+    const onScroll = () => header.classList.toggle('is-solid', (window.scrollY || 0) > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+    onScroll();
   }
 
-  const setIcon = (open) => {
+  // Active section highlight (stable midline check)
+  const sections = ['inventory','services','about','branches','contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window && sections.length && navLinks.length) {
+    const linkMap = new Map(navLinks.map(a => [a.getAttribute('href'), a]));
+    let activeId = null;
+
+    const io = new IntersectionObserver((entries) => {
+      // Choose the section that crosses the viewport midline
+      const mid = window.innerHeight / 2;
+      let best = null, bestDelta = Infinity;
+
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const rect = en.target.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const delta = Math.abs(center - mid);
+        if (delta < bestDelta) { bestDelta = delta; best = en.target; }
+      });
+
+      if (best && best.id !== activeId) {
+        activeId = best.id;
+        navLinks.forEach(a => a.classList.remove('active'));
+        const link = linkMap.get('#' + activeId);
+        if (link) link.classList.add('active');
+      }
+    }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.08 });
+
+    sections.forEach(sec => io.observe(sec));
+  }
+
+  // Hamburger icon swap helper
+  const setHamburgerIcon = (open) => {
+    if (!menuBtn) return;
     const i = menuBtn.querySelector('i');
     if (!i) return;
-    i.classList.toggle('fa-bars', !open);
-    i.classList.toggle('fa-xmark', open);
+    // Support both fa-bars-staggered and fa-bars
+    const hasStaggered = i.classList.contains('fa-bars-staggered');
+    if (open) {
+      i.classList.add('fa-xmark');
+      i.classList.remove(hasStaggered ? 'fa-bars-staggered' : 'fa-bars');
+    } else {
+      i.classList.remove('fa-xmark');
+      i.classList.add(hasStaggered ? 'fa-bars-staggered' : 'fa-bars');
+    }
   };
 
   const openSheet = () => {
-    sheet.classList.add('show'); document.body.classList.add('noscroll');
-    menuBtn.setAttribute('aria-expanded','true'); setIcon(true);
+    if (!sheet || !menuBtn) return;
+    sheet.classList.add('show');
+    document.body.classList.add('noscroll');
+    menuBtn.setAttribute('aria-expanded','true');
+    setHamburgerIcon(true);
   };
   const closeSheet = () => {
-    sheet.classList.remove('show'); document.body.classList.remove('noscroll');
-    menuBtn.setAttribute('aria-expanded','false'); setIcon(false);
+    if (!sheet || !menuBtn) return;
+    sheet.classList.remove('show');
+    document.body.classList.remove('noscroll');
+    menuBtn.setAttribute('aria-expanded','false');
+    setHamburgerIcon(false);
   };
 
-  menuBtn?.addEventListener('click', () => sheet.classList.contains('show') ? closeSheet() : openSheet());
-  close?.addEventListener('click', closeSheet);
-  sheet?.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
+  menuBtn?.addEventListener('click', () => {
+    sheet?.classList.contains('show') ? closeSheet() : openSheet();
+  });
+  closeBtn?.addEventListener('click', closeSheet);
+  sheet?.addEventListener('click', (e) => { if (e.target === sheet) closeSheet(); });
   sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSheet));
+
+  // Smooth anchor scroll with sticky header offset
+  const headerOffset = () => {
+    // Adjust this if your header height changes
+    return header ? Math.min(88, header.offsetHeight + 10) : 78;
+  };
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (!id || id.length < 2) return;
+      const target = document.getElementById(id.slice(1));
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+      const opts = { top, behavior: 'smooth' };
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) opts.behavior = 'auto';
+      window.scrollTo(opts);
+    });
+  });
 })();
 
-/* Inventory filter (left in place in case you enable inputs later) */
+/* =========================
+   Inventory filter (optional)
+   ========================= */
 (() => {
   const search = document.getElementById('search');
   const filter = document.getElementById('filter');
   const cards  = [...document.querySelectorAll('#grid .inv-card')];
+  if (!cards.length) return;
 
   const apply = () => {
     const q = (search?.value || '').toLowerCase().trim();
@@ -75,47 +151,70 @@
     });
   };
 
-  search?.addEventListener('input', apply);
+  search?.addEventListener('input', apply, { passive: true });
   filter?.addEventListener('change', apply);
 })();
 
-/* Reveal on scroll */
+/* =========================
+   Reveal on scroll
+   ========================= */
 (() => {
   const els = [...document.querySelectorAll('.reveal')];
-  if (!els.length) return;
+  if (!els.length || !('IntersectionObserver' in window)) return;
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
     });
-  }, { threshold: .12 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
   els.forEach(el => io.observe(el));
+
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(el => el.classList.add('in'));
+  }
 })();
 
-/* Contact form polish + WhatsApp handoff */
+/* =========================
+   Contact form polish + WhatsApp handoff
+   ========================= */
 (() => {
   const form = document.querySelector('#contact form[name="enquiry"]');
   if (!form) return;
   const status = document.getElementById('formStatus');
 
-  // floating labels
-  const sync = el => { const g = el.closest('.fgroup'); if (!g) return; g.classList.toggle('filled', !!el.value.trim()); };
-  form.querySelectorAll('.finput').forEach(el => { sync(el); el.addEventListener('input',()=>sync(el)); el.addEventListener('blur',()=>sync(el)); });
+  // Floating labels sync
+  const sync = (el) => {
+    const g = el.closest('.fgroup');
+    if (!g) return;
+    g.classList.toggle('filled', !!el.value.trim());
+  };
+  form.querySelectorAll('.finput').forEach(el => {
+    sync(el);
+    el.addEventListener('input', () => sync(el));
+    el.addEventListener('blur', () => sync(el));
+  });
 
-  // light phone formatting
+  // Light phone formatting
   const phone = form.querySelector('[name="phone"]');
   phone?.addEventListener('input', () => {
+    // keep + and digits only for display
     let v = phone.value.replace(/[^\d+]/g, '');
     v = v.replace(/(\+\d{1,3})(\d+)/, '$1 $2');
     v = v.replace(/(\d{5})(\d)/, '$1 $2');
     phone.value = v;
   });
 
-  // WhatsApp handoff to VK Motors
+  // WhatsApp handoff to VK Motors (digits-only for wa.me)
   form.addEventListener('submit', () => {
-    const fd = new FormData(form);
-    const name  = (fd.get('name')  || '').toString().trim();
-    const ph    = (fd.get('phone') || '').toString().trim();
-    const email = (fd.get('email') || '').toString().trim();
+    const fd    = new FormData(form);
+    const name  = (fd.get('name')    || '').toString().trim();
+    const ph    = (fd.get('phone')   || '').toString().trim();
+    const email = (fd.get('email')   || '').toString().trim();
     const msg   = (fd.get('message') || '').toString().trim();
 
     const lines = [
@@ -127,8 +226,10 @@
     ].filter(Boolean);
 
     const text = lines.join('\n');
-    const waNumber = '+91 88663 32130';   
-    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+
+    // wa.me must be digits ONLY (country code + number). No spaces or +.
+    const waNumberDigits = '918866332130';
+    const url = `https://wa.me/${waNumberDigits}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
 
     if (status) status.textContent = 'Sending… (WhatsApp opened)';

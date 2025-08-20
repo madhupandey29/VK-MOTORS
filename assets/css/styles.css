@@ -299,3 +299,113 @@ body.noscroll{ overflow:hidden }
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+/* ===== Mobile-first polish & fixes ===== */
+
+/* Layout container rhythm on small screens */
+@media (max-width: 640px){
+  .sec{ padding:64px 0; }
+  .Logo{ width:95px; }
+  .header-pill{ padding: 0 .25rem; }
+}
+
+/* Header spacing on mobile to reduce crowding */
+#siteHeader .mx-auto{ padding-top:.6rem; padding-bottom:.6rem; }
+
+/* Hero: adaptive height + better text sizing on mobile */
+@media (max-width: 640px){
+  .hero-wrap{ height: 520px; }
+  .hero-content{ margin: 0 .5rem; margin-top: 72px; }
+  .hero-title{ font-size: clamp(22px, 6vw, 32px); line-height: 1.18; }
+  .btn-hero{ width: 100%; max-width: 420px; }
+}
+
+/* Inventory grid: tighter gaps on small screens */
+@media (max-width: 640px){
+  #grid{ gap:14px; }
+  .inv-card{ border-radius:.9rem; }
+  .inv-title{ font-size: 1rem; }
+  .inv-spec{ font-size: .9rem; }
+  .inv-foot{ gap:.4rem; }
+  .text-link{ font-weight:800; }
+}
+
+/* Services grid: comfortable touch targets */
+@media (max-width: 640px){
+  .svc-card{ padding:.9rem; }
+  .svc-icon{ height:48px; width:48px; border-radius:10px; }
+  .svc-title{ font-size:1rem; }
+  .svc-desc{ font-size:.95rem; }
+}
+
+/* About section: stack columns, keep visual weight balanced */
+@media (max-width: 768px){
+  #about .grid{ grid-template-columns: 1fr; }
+  .about-img{ height: 240px !important; object-fit: cover; }
+  .stat{ width: 100%; max-width: 220px; margin: 0 auto; }
+  .stat-num{ font-size: 1.35rem; }
+}
+
+/* Branch cards: denser grid on tiny devices */
+@media (max-width: 640px){
+  .branches-grid{ grid-template-columns: 1fr; gap:16px; }
+  .branch-card{ padding:18px; }
+  .branches-section{ padding: 64px 0; }
+}
+
+/* Contact form: larger tap areas & spacing */
+@media (max-width: 640px){
+  .contact-card{ padding: 1rem; }
+  .finput{ padding: 1rem; border-radius: 14px; }
+  .flabel{ left: 1rem; top: 1rem; }
+  .form-note{ font-size: .9rem; }
+}
+
+/* Footer: single column stack, comfy spacing */
+@media (max-width: 768px){
+  .site-footer{ padding: 56px 0 22px; }
+  .footer-grid{ grid-template-columns:1fr; gap:22px; }
+  .ft-logo{ height: 72px; }
+  .footer-bottom{ gap:.5rem; }
+}
+
+/* Mobile nav buttons: full-width look inside the sheet */
+@media (max-width: 768px){
+  .mobile-card .btn-ghost,
+  .mobile-card .btn-primary{ height: 46px; border-radius: 12px; font-weight: 800; }
+  .mobile-card .m-a{ font-size: 1.02rem; }
+}
+
+/* Fine-tune header icon pills (whatsapp/phone) on small screens */
+@media (max-width: 768px){
+  .header-actions .icon-btn{ width:42px; height:42px; }
+}
+
+/* Map iframe: keep aspect ratio predictable on phones */
+@media (max-width: 640px){
+  iframe[title="Isanpur Map"]{ height: 300px !important; }
+}
+
+/* Improve contrast of top nav when over hero image on small screens */
+@media (max-width: 768px){
+  #siteHeader:not(.is-solid) .nav-a{ color: #e5e7eb; }
+}
+
+/* Prevent image overflow in cards on iOS */
+.inv-media img{ max-width: 100%; }
+
+/* Slightly stronger brand color on dark backgrounds for readability */
+@media (prefers-color-scheme: dark){
+  .text-link.muted{ color:#cbd5e1; }
+}
+
+/* Reduce motion: already present; ensure reveal respects it */
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1 !important; transform:none !important; }
+}
+
+/* Tighter hero overlay on mid screens for clarity */
+@media (min-width: 640px) and (max-width: 1024px){
+  .hero-wrap{ height: 620px; }
+}
+
